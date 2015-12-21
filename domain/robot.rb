@@ -25,6 +25,20 @@ class Robot
     "#{@x},#{@y},#{@facing.to_s.upcase}"
   end
 
+  def rotate_right
+    right_rotation_order = [:north, :east, :south, :west, :north]
+    next_cardinal_point = right_rotation_order.find_index(@facing) + 1
+    @facing = right_rotation_order[next_cardinal_point]
+    self
+  end
+
+  def rotate_left
+    left_rotation_order = [:north, :west, :south, :east, :north]
+    next_cardinal_point = left_rotation_order.find_index(@facing) + 1
+    @facing = left_rotation_order[next_cardinal_point]
+    self
+  end
+
   private
 
   def move_west
