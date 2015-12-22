@@ -39,7 +39,7 @@ Permitted commands are:
     MOVE: to move the robot on step forward where the robot is facing
     LEFT: to rotate the robot to the left
     RIGHT: to rotate the robot to the right
-    REPORT: to report where the is the robot at the moment.
+    REPORT: to report where the robot is at the moment.
 
   ```
 # Example 
