@@ -4,8 +4,8 @@ require_relative 'board_position'
 
 class Robot
   def initialize(board_position:, facing:,
-                 gyroscope_class: Gyroscope, leg_class: Legs)
-    @legs = leg_class.stand_in(board_position)
+                 gyroscope_class: Gyroscope, legs_class: Legs)
+    @legs = legs_class.stand_in(board_position)
     @gyroscope = gyroscope_class.new(facing)
   end
 
