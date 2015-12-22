@@ -40,19 +40,19 @@ class RobotOrderTranslator
     @robot = Robot.place(x: x.to_i, y: y.to_i, facing: facing.downcase.to_sym)
   end
 
-  def order_left(order)
+  def order_left(_order)
     robot.rotate_left
   end
 
-  def order_right(order)
+  def order_right(_order)
     robot.rotate_right
   end
 
-  def order_move(order)
+  def order_move(_order)
     robot.move
   end
 
-  def order_report(order)
+  def order_report(_order)
     "Output: #{robot.report}"
   end
 end
