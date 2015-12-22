@@ -3,10 +3,6 @@ require 'bundler/setup'
 require 'rspec'
 require_relative '../domain/robot'
 
-#TODO
-# add integration tests
-# discard all commands until robot is placed
-
 describe 'Robot domain' do
   context 'valid' do
     describe 'movement' do
