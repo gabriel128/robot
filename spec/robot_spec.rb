@@ -64,8 +64,8 @@ end
 
 def expects_robot_to_move(from:, to:, when_facing:)
   robot = Robot.place(x: from[0], y: from[1], facing: when_facing).move
-  expect(robot.position).to(eq(to),
-    "exepcted: #{to}\ngot: #{robot.position}\nwhen facing: " \
+  expect(robot.report).to(eq("#{to[0]},#{to[1]},#{when_facing.to_s.upcase}"),
+    "exepcted: #{to}\ngot: #{robot.report}\nwhen facing: " \
     "#{when_facing}\nfrom: #{from}")
 end
 
