@@ -5,9 +5,9 @@ of dimensions 5 units x 5 units. There are not any kind of obstruction and
 the robot is free to roam around the surface of the table, and he is clever
 enough to recognize the board limits, so don't worry, he won't break!
 
-## Enviroment
+## Environment
  
-  There is no specific OS requirment
+  There is no specific OS requirement
 
 ## Dependencies
 
