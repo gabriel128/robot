@@ -1,18 +1,22 @@
+require 'rubygems'
+require 'bundler/setup'
+require 'response_callback'
 require_relative '../domain/robot'
 
 class RobotOrderTranslator
-  COMMANDS_TO_MESSAGES = { 'PLACE' => :order_to_place,
-                           'LEFT' => :order_left,
-                           'RIGHT' => :order_right,
-                           'MOVE' => :order_move,
-                           'REPORT' => :order_report }
+  COMMANDS_TO_METHOD = { 'PLACE' => :order_to_place,
+                         'LEFT' => :order_left,
+                         'RIGHT' => :order_right,
+                         'MOVE' => :order_move,
+                         'REPORT' => :order_report }
 
   def order_robot_to(order)
     fail 'Place the robot first' unless place_is_the?(order) || robot_placed?
-    message = COMMANDS_TO_MESSAGES.fetch(get_first_word_from(order))
-    send(message, order)
+    method = COMMANDS_TO_METHOD.fetch(get_first_word_from(order))
+    response = send(method, order)
+    yield ResponseCallback::Success.new yield_var: response if block_given?
   rescue => e
-    puts "Failure: #{e.message}"
+    yield ResponseCallback::Fail.new yield_var: e.message if block_given?
   end
 
   private
