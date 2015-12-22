@@ -4,11 +4,8 @@ require 'rspec'
 require_relative '../domain/robot'
 
 #TODO
-# add board limit validations
-# show error when placed multiple times and wrong position
 # add integration tests
 # discard all commands until robot is placed
-# validate robot when placed
 
 describe 'Robot domain' do
   context 'valid' do
@@ -58,6 +55,39 @@ describe 'Robot domain' do
 
       it { expect(robot.report).to eq '3,3,NORTH' }
       it { expect(robot.move.report).to eq '3,4,NORTH' }
+    end
+  end
+
+  context 'invalid' do
+    describe 'north movement' do
+      let(:robot) { Robot.place(x: 4, y: 4, facing: :north) }
+      it { expect(robot.move.report).to eq '4,4,NORTH' }
+    end
+    describe 'east movement' do
+      let(:robot) { Robot.place(x: 4, y: 2, facing: :east) }
+      it { expect(robot.move.report).to eq '4,2,EAST' }
+    end
+    describe 'west movement' do
+      let(:robot) { Robot.place(x: 0, y: 4, facing: :west) }
+      it { expect(robot.move.report).to eq '0,4,WEST' }
+    end
+    describe 'south movement' do
+      let(:robot) { Robot.place(x: 1, y: 0, facing: :south) }
+      it { expect(robot.move.report).to eq '1,0,SOUTH' }
+    end
+    describe 'placing' do
+      it 'raises an error'do
+        expect { Robot.place(x: 6, y: 9, facing: :south) }
+          .to raise_error 'Can not place the robot there'
+      end
+    end
+    describe 'multiple placings' do
+      it 'raises an error'do
+        expect do
+          Robot.place(x: 4, y: 2, facing: :south)
+            .place(x: 5, y: 7, facing: :north)
+        end.to raise_error 'Can not place the robot there'
+      end
     end
   end
 end
